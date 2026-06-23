@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>LifeWallet — Kampagnenplan Launch Oktober 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',sans-serif;background:#F1F2D3;color:#2C2D1C}
+#pw-screen{position:fixed;inset:0;background:#2C2D1C;z-index:9999;display:flex;align-items:center;justify-content:center}
+#pw-box{width:100%;max-width:360px;padding:40px 36px;background:rgba(255,255,255,0.04);border:1px solid rgba(160,190,173,0.2);border-radius:12px;text-align:center}
+#pw-eye{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#A0BEAD;margin-bottom:20px}
+#pw-title{font-size:22px;font-weight:600;color:#F1F2D3;margin-bottom:6px;line-height:1.2}
+#pw-sub{font-size:12px;color:rgba(241,242,211,0.4);margin-bottom:28px;line-height:1.5}
+#pw-input{width:100%;padding:12px 16px;background:rgba(241,242,211,0.06);border:1px solid rgba(160,190,173,0.3);border-radius:8px;font-size:14px;color:#F1F2D3;outline:none;text-align:center;letter-spacing:1px;margin-bottom:12px;font-family:'Poppins',sans-serif}
+#pw-input::placeholder{color:rgba(241,242,211,0.25);letter-spacing:0}
+#pw-input:focus{border-color:rgba(160,190,173,0.7)}
+#pw-btn{width:100%;padding:12px;background:#A0BEAD;border:none;border-radius:8px;font-size:13px;font-weight:700;color:#2C2D1C;cursor:pointer;transition:opacity .15s;font-family:'Poppins',sans-serif}
+#pw-btn:hover{opacity:.88}
+#pw-err{font-size:11px;color:#e88888;margin-top:10px;min-height:16px}
+.top-bar{background:#2C2D1C;padding:14px 28px;display:flex;align-items:center;justify-content:space-between}
+.top-brand{font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#A0BEAD}
+.top-right{font-size:11px;color:rgba(241,242,211,0.4)}
+.hero{background:#4F5125;padding:32px 28px 26px}
+.hero-eye{font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:#A0BEAD;margin-bottom:10px}
+.hero-title{font-size:32px;font-weight:600;color:#F1F2D3;line-height:1.1;margin-bottom:7px}
+.hero-sub{font-size:13px;color:rgba(241,242,211,0.55);line-height:1.5}
+.kpi-strip{background:#2C2D1C;display:grid;grid-template-columns:repeat(6,1fr);border-top:1px solid rgba(160,190,173,0.2)}
+.kpi{padding:16px 10px;text-align:center;border-right:1px solid rgba(160,190,173,0.1)}
+.kpi:last-child{border-right:none}
+.kn{font-size:18px;font-weight:700;color:#A0BEAD;line-height:1}
+.kl{font-size:10px;color:rgba(241,242,211,0.5);margin-top:4px;line-height:1.3}
+.ks{font-size:9px;color:rgba(241,242,211,0.28);margin-top:2px}
+.tabs{background:#F1F2D3;display:flex;border-bottom:2px solid #d4d5b8;padding:0 20px;overflow-x:auto}
+.tab{font-size:12px;font-weight:500;padding:12px 16px;border:none;background:none;cursor:pointer;color:#6b6c4a;border-bottom:2.5px solid transparent;margin-bottom:-2px;white-space:nowrap;transition:all .12s;font-family:'Poppins',sans-serif}
+.tab.on{color:#2C2D1C;border-bottom-color:#4F5125;font-weight:700}
+.tab:hover:not(.on){color:#2C2D1C;border-bottom-color:rgba(79,81,37,.25)}
+.panel{display:none;padding:24px 28px;background:#F1F2D3}.panel.on{display:block}
+.sec-lbl{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#4F5125;margin-bottom:14px;padding-bottom:7px;border-bottom:1.5px solid #4F5125}
+.phase{margin-bottom:16px}
+.ph-hd{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.ph-bar{width:4px;height:38px;border-radius:2px;flex-shrink:0}
+.ph-name{font-size:13px;font-weight:700;color:#2C2D1C}
+.ph-date{font-size:11px;color:#6b6c4a;margin-top:2px}
+.items{display:flex;flex-direction:column;gap:4px;margin-left:14px}
+.item{display:flex;align-items:flex-start;gap:8px;background:#fff;border:1px solid #d4d5b8;border-radius:7px;padding:8px 12px}
+.itxt{flex:1;font-size:12px;color:#3a3b1e;line-height:1.45}
+.chip{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 8px;border-radius:20px;flex-shrink:0;margin-top:1px;white-space:nowrap}
+.email-list{display:flex;flex-direction:column;gap:9px}
+.ec{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:14px 16px;border-left:5px solid #4F5125}
+.et{display:flex;align-items:center;margin-bottom:7px}
+.en{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#6b6c4a}
+.ed{font-size:11px;color:#6b6c4a;margin-left:auto}
+.etitle{font-size:13px;font-weight:700;color:#2C2D1C;margin-bottom:5px;line-height:1.3}
+.edesc{font-size:12px;color:#3a3b1e;line-height:1.55}
+.etag{display:inline-block;margin-top:7px;font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+.org-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.oc{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:14px 15px;border-top:3px solid #4F5125}
+.ot{font-size:13px;font-weight:700;color:#2C2D1C;margin-bottom:3px}
+.of{font-size:10px;font-weight:600;color:#4F5125;text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
+.ol{list-style:none;display:flex;flex-direction:column;gap:3px}
+.ol li{font-size:11.5px;color:#3a3b1e;display:flex;gap:5px;line-height:1.4}
+.ol li::before{content:"—";color:#A0BEAD;flex-shrink:0;font-weight:700}
+.diff{background:#4F5125;border-radius:10px;padding:14px 16px;margin-top:10px}
+.diff p{font-size:12px;color:rgba(241,242,211,0.78);line-height:1.6}
+.diff strong{color:#A0BEAD}
+.lm-flow{display:flex;margin-bottom:20px;background:#fff;border:1px solid #d4d5b8;border-radius:10px;overflow:hidden}
+.fs{flex:1;padding:14px 8px;text-align:center;border-right:1px solid #d4d5b8}
+.fs:last-child{border-right:none}
+.fn{font-size:18px;font-weight:700;color:#4F5125;line-height:1}
+.fl{font-size:11px;color:#6b6c4a;margin-top:4px;line-height:1.3}
+.fa{display:flex;align-items:center;padding:0 2px;background:#F1F2D3;color:#A0BEAD;font-size:18px;font-weight:700;flex-shrink:0}
+.lm-desc{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:16px;margin-bottom:20px;border-left:4px solid #A0BEAD}
+.lm-desc h3{font-size:12px;font-weight:700;color:#2C2D1C;margin-bottom:6px}
+.lm-desc p{font-size:12px;color:#3a3b1e;line-height:1.55}
+.lm-desc .highlight{background:#eaf0ee;border-radius:6px;padding:8px 11px;margin-top:8px;font-size:11.5px;color:#2d5244;line-height:1.5}
+.pl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.plc{background:#fff;border:1px solid #d4d5b8;border-radius:9px;padding:13px 15px;border-left:3px solid #A0BEAD}
+.plh{font-size:11.5px;font-weight:700;color:#2C2D1C;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%;background:#A0BEAD;flex-shrink:0}
+.plt{font-size:11px;color:#3a3b1e;line-height:1.5}
+.plt em{font-style:normal;color:#4F5125;font-weight:600}
+.cr-grid{display:flex;flex-direction:column;gap:8px}
+.cr-card{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:14px 16px}
+.cr-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+.cr-num{width:28px;height:28px;border-radius:50%;background:#4F5125;color:#F1F2D3;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.cr-title{font-size:13px;font-weight:700;color:#2C2D1C;flex:1;line-height:1.3}
+.cr-format{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap;flex-shrink:0}
+.cr-desc{font-size:12px;color:#3a3b1e;line-height:1.55;margin-left:38px}
+.cr-hook{font-size:11px;font-style:italic;color:#6b6c4a;margin-left:38px;margin-top:5px;padding-left:10px;border-left:2px solid #A0BEAD}
+.pd-grid{display:flex;flex-direction:column;gap:8px}
+.pd-card{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:14px 16px;border-left:4px solid #3D519E}
+.pd-head{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.pd-num{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#3D519E}
+.pd-date{font-size:11px;color:#6b6c4a;margin-left:auto}
+.pd-title{font-size:13px;font-weight:700;color:#2C2D1C;margin-bottom:4px}
+.pd-desc{font-size:12px;color:#3a3b1e;line-height:1.55}
+.pd-url{display:inline-block;margin-top:6px;font-size:10px;font-weight:700;color:#3D519E;background:rgba(61,81,158,0.08);padding:3px 9px;border-radius:20px;letter-spacing:.5px}
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.ct-card{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:14px 15px;border-top:3px solid #A0BEAD}
+.ct-title{font-size:13px;font-weight:700;color:#2C2D1C;margin-bottom:6px}
+.ct-list{list-style:none;display:flex;flex-direction:column;gap:3px}
+.ct-list li{font-size:11.5px;color:#3a3b1e;display:flex;gap:5px;line-height:1.4}
+.ct-list li::before{content:"→";color:#4F5125;flex-shrink:0;font-weight:700}
+.paid-grid{display:flex;flex-direction:column;gap:8px}
+.paid-card{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:14px 16px}
+.pc-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:6px}
+.pc-num{width:26px;height:26px;border-radius:50%;background:rgba(79,81,37,0.1);color:#4F5125;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
+.pc-title{font-size:13px;font-weight:700;color:#2C2D1C;flex:1}
+.pc-format{font-size:9px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap}
+.pc-desc{font-size:12px;color:#3a3b1e;line-height:1.55;margin-left:36px}
+.pc-hook{font-size:11px;font-style:italic;color:#6b6c4a;margin-left:36px;margin-top:5px;padding-left:10px;border-left:2px solid #B6C4DB}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.box-plain{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:14px 15px}
+.box-h{font-size:13px;font-weight:700;color:#2C2D1C;margin-bottom:5px}
+.box-t{font-size:12px;color:#3a3b1e;line-height:1.5}
+.note{background:rgba(182,196,219,0.15);border:1px solid rgba(61,81,158,0.2);border-radius:8px;padding:11px 14px;font-size:12px;color:#2C2D1C;line-height:1.5;margin-bottom:14px}
+.note strong{color:#3D519E}
+.info-box{background:#eaf0ee;border:1px solid #A0BEAD;border-radius:8px;padding:11px 14px;margin-top:8px;font-size:12px;color:#2d5244;line-height:1.5}
+.warn{background:#fdf5e6;border:1px solid #e8c570;border-radius:8px;padding:11px 14px;font-size:12px;color:#854F0B;line-height:1.5;margin-top:8px}
+/* BUDGET */
+.budget-wrap{display:flex;flex-direction:column;gap:12px;margin-bottom:16px}
+.budget-phase{background:#fff;border:1px solid #d4d5b8;border-radius:10px;overflow:hidden}
+.bp-head{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #d4d5b8}
+.bp-label{font-size:11px;font-weight:700;color:#2C2D1C;text-transform:uppercase;letter-spacing:.8px}
+.bp-date{font-size:11px;color:#6b6c4a}
+.bp-price{font-size:22px;font-weight:700;color:#4F5125;padding:10px 16px 4px}
+.bp-per{font-size:11px;color:#6b6c4a;padding:0 16px 12px}
+.bp-includes{padding:0 16px 14px;display:flex;flex-direction:column;gap:3px}
+.bp-item{font-size:11.5px;color:#3a3b1e;display:flex;gap:6px;line-height:1.4}
+.bp-item::before{content:"✓";color:#A0BEAD;font-weight:700;flex-shrink:0}
+.budget-total{background:#4F5125;border-radius:10px;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
+.bt-lbl{font-size:12px;color:rgba(241,242,211,0.6)}
+.bt-val{font-size:20px;font-weight:700;color:#A0BEAD}
+.budget-note{background:rgba(182,196,219,0.15);border:1px solid rgba(61,81,158,0.2);border-radius:8px;padding:11px 14px;font-size:12px;color:#2C2D1C;line-height:1.5;margin-top:8px}
+.budget-note strong{color:#3D519E}
+/* COLD OUTREACH */
+.co-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+.co-card{background:#fff;border:1px solid #d4d5b8;border-radius:10px;padding:14px 15px;border-top:3px solid #3D519E}
+.co-title{font-size:13px;font-weight:700;color:#2C2D1C;margin-bottom:3px}
+.co-sub{font-size:10px;font-weight:600;color:#3D519E;text-transform:uppercase;letter-spacing:.8px;margin-bottom:7px}
+.co-list{list-style:none;display:flex;flex-direction:column;gap:3px}
+.co-list li{font-size:11.5px;color:#3a3b1e;display:flex;gap:5px;line-height:1.4}
+.co-list li::before{content:"→";color:#A0BEAD;flex-shrink:0;font-weight:700}
+footer{background:#2C2D1C;padding:16px 28px;text-align:center;font-size:11px;color:rgba(241,242,211,0.3);letter-spacing:.5px}
+</style>
+</head>
+<body>
+
+<div id="pw-screen">
+  <div id="pw-box">
+    <div id="pw-eye">LifeWallet</div>
+    <div id="pw-title">Kampagnenplan<br>Launch Oktober 2026</div>
+    <div id="pw-sub">Dieses Dokument ist vertraulich.<br>Bitte Passwort eingeben.</div>
+    <input id="pw-input" type="password" placeholder="Passwort" onkeydown="if(event.key==='Enter')checkPw()" autofocus>
+    <button id="pw-btn" onclick="checkPw()">Zugang bestätigen</button>
+    <div id="pw-err"></div>
+  </div>
+</div>
+
+<div class="top-bar">
+  <span class="top-brand">LifeWallet</span>
+  <span class="top-right">Kampagnenplan · Launch Oktober 2026 · Vertraulich</span>
+</div>
+
+<div class="hero">
+  <div class="hero-eye">App Launch · Oktober 2026</div>
+  <div class="hero-title">Marketingkampagne<br>01. Juli – 01. Oktober</div>
+  <div class="hero-sub">Ziel: Warteliste aufbauen &nbsp;·&nbsp; Early-Access-Anmeldungen &nbsp;·&nbsp; App-Launch vorbereiten &nbsp;·&nbsp; 13 Wochen &nbsp;·&nbsp; Paid ab Oktober</div>
+</div>
+
+<div class="kpi-strip">
+  <div class="kpi"><div class="kn">01. Okt.</div><div class="kl">App Launch</div><div class="ks">Hard Deadline</div></div>
+  <div class="kpi"><div class="kn">13 Wo.</div><div class="kl">Kampagne</div><div class="ks">Juli – Oktober</div></div>
+  <div class="kpi"><div class="kn">6 Creator</div><div class="kl">Influencer</div><div class="ks">ab 25. August</div></div>
+  <div class="kpi"><div class="kn">3 Pods</div><div class="kl">Podcasts</div><div class="ks">Sep · Okt · Okt</div></div>
+  <div class="kpi"><div class="kn">5 Mails</div><div class="kl">E-Mail-Sequenz</div><div class="ks">Juli – Oktober</div></div>
+  <div class="kpi"><div class="kn">ab Okt.</div><div class="kl">Paid Social</div><div class="ks">post-Launch</div></div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="sw(0)">Zeitplan</button>
+  <button class="tab" onclick="sw(1)">E-Mails</button>
+  <button class="tab" onclick="sw(2)">Organic</button>
+  <button class="tab" onclick="sw(3)">Warteliste</button>
+  <button class="tab" onclick="sw(4)">Influencer</button>
+  <button class="tab" onclick="sw(5)">Podcasts</button>
+  <button class="tab" onclick="sw(6)">Content-Tag</button>
+  <button class="tab" onclick="sw(7)">Cold Outreach B2B</button>
+  <button class="tab" onclick="sw(8)">Paid (ab Okt.)</button>
+  <button class="tab" onclick="sw(9)">Budget</button>
+</div>
+
+<!-- ZEITPLAN -->
+<div class="panel on">
+  <div class="sec-lbl">Zeitplan & Phasen</div>
+
+  <div class="phase">
+    <div class="ph-hd"><div class="ph-bar" style="background:#A0BEAD"></div><div><div class="ph-name">Phase 0 — Vorbereitung (still)</div><div class="ph-date">bis 30. Juni</div></div></div>
+    <div class="items">
+      <div class="item"><div class="itxt">9 erste Posts produzieren, texten & designen — fertig vor 15.07. Aufteilung: 3× App-Vorstellung/Gründerinnen · 3× Educational/Aufklärung · 3× Emotional</div><span class="chip" style="background:#eaf0ee;color:#2d5244">Content</span></div>
+      <div class="item"><div class="itxt">ManyChat einrichten: "DM LIFEWALLET" → Auto-Antwort mit Wartelisten-Link. Vollständig testen vor Phase 1.</div><span class="chip" style="background:#eaf0ee;color:#2d5244">Setup</span></div>
+      <div class="item"><div class="itxt">Instagram-Profil, Bio & Highlights fertigstellen. Landingpage-Link in die Bio. LinkedIn-Unternehmensprofil anlegen.</div><span class="chip" style="background:#eaf0ee;color:#2d5244">Setup</span></div>
+      <div class="item"><div class="itxt">Content-Tag-Termin mit Sploon bis Mitte Juli fixieren — damit Videoformate und Skripte rechtzeitig geplant werden können.</div><span class="chip" style="background:#eaf0ee;color:#2d5244">Setup</span></div>
+      <div class="item"><div class="itxt">Influencer-Outreach vorbereiten: persönliche Nachrichten für Creator ohne direkten Gründerinnen-Kontakt. Budgetabfrage & Interesse. Noch nicht verschicken.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Outreach</span></div>
+      <div class="item"><div class="itxt">Podcast-Anfragen: Marlene Lufen ("M wie Marlene") + "Verquatscht & Verbunden" (Andrea & Lisa-Marie Schiffner) kontaktieren. Ziel: Aufnahmetermine in den ersten zwei Augustwochen fixieren.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Podcast</span></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph-hd"><div class="ph-bar" style="background:#4F5125"></div><div><div class="ph-name">Phase 1 — Fundament legen</div><div class="ph-date">01. Juli – 14. Juli</div></div></div>
+    <div class="items">
+      <div class="item"><div class="itxt"><strong>01. Juli — Erste 3 Posts live.</strong> Kanal geht still live. Sollte jemand auf das Profil treffen, ist etwas da und ein erster Teaser auf das Produkt sichtbar. Post 1: Wer sind wir / Idee. Post 2: Das Problem (Erklärungs-Carousel). Post 3: Warteliste + DM-Mechanic in Story.</div><span class="chip" style="background:#f1f2d3;color:#4F5125">Instagram</span></div>
+      <div class="item"><div class="itxt">Influencer-Outreach startet: Nachrichten raus an alle Creator ohne persönlichen Gründerinnen-Kontakt. Budgetabfragen, erste Calls vereinbaren. Ziel: alle Rückmeldungen bis Ende Juli.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Outreach</span></div>
+      <div class="item"><div class="itxt">Podcast-Kommunikation laufend: Terminfindung mit Marlene Lufen + Andrea & Lisa-Marie Schiffner. Aufnahmen in den ersten zwei Augustwochen anpeilen.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Podcast</span></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph-hd"><div class="ph-bar" style="background:#B6C4DB"></div><div><div class="ph-name">Phase 1b — Kanal auffahren</div><div class="ph-date">15. Juli – 31. Juli</div></div></div>
+    <div class="items">
+      <div class="item"><div class="itxt"><strong>15. Juli — Instagram organisch aktiv.</strong> Ab jetzt Mehrwert-Posts die neue Reichweite auf das Profil bringen: Educational Content, Erklärungs-Carousels, emotionale Geschichten. Kein Gründerinnen-Fokus — reiner Inhalt der saved und weitergeteilt wird. Frequenz: 1 Post/Woche, ab August 2×/Woche.</div><span class="chip" style="background:#f1f2d3;color:#4F5125">Instagram</span></div>
+      <div class="item"><div class="itxt"><strong>15. Juli — Follower-to-Follower-Tool aktivieren.</strong> Zielgruppen: Eltern 30–50, Organisation & Ordnung, Personal Finance/Vorsorge, Trauer-nahe Accounts, Familienplanung & Schwangerschaft. Hashtags: #vorsorge #familienorganisation #ordnungsliebe #nachlassplanung #familieleben</div><span class="chip" style="background:#f1f2d3;color:#4F5125">Tool</span></div>
+      <div class="item"><div class="itxt"><strong>15. Juli — LinkedIn-Start.</strong> Erster Post: Foto der Gründerinnen, Idee kurz angeschnitten, Landingpage-Link. Persönlich, direkt, kein langer Text.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">LinkedIn</span></div>
+      <div class="item"><div class="itxt"><strong>15. Juli — Cold Outreach B2B startet parallel zu organischem Social.</strong> Lead-Listen über Apollo.io oder Echobot aufbauen. Erste Welle: HR & People Culture (Corporate Benefit) + Recht & Finanzen (Multiplikatoren). Ziel: 100–200 qualifizierte Mails/Woche, 3-stufige Follow-up-Sequenz. Details im Tab "Cold Outreach B2B".</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Cold Outreach</span></div>
+      <div class="item"><div class="itxt"><strong>Bis letzte Juliwoche — Influencer-Preise & Rückmeldungen vollständig.</strong> Alle Anfragen müssen beantwortet sein. Entscheidungen treffen: Wer ist im Budget? Wer macht Barter? Wer ist wirklich überzeugt? Ziel: min. 4 bestätigte Creator, alle Briefings bis Ende August fertig.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Entscheidung</span></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph-hd"><div class="ph-bar" style="background:#3D519E"></div><div><div class="ph-name">Phase 2 — Auffahren & Content-Sprint</div><div class="ph-date">01. August – 24. August</div></div></div>
+    <div class="items">
+      <div class="item"><div class="itxt"><strong>Ab 01. August — 2 Posts/Woche.</strong> Mehrwert-Content intensivieren: Vollmacht/Testament/Patientenverfügung erklärt · 6 Dokumente die deine Familie braucht · Was du in den ersten 48h nach einem Todesfall regeln musst · Vorsorge als Liebesakt. Ziel: Saves & Shares.</div><span class="chip" style="background:#f1f2d3;color:#4F5125">Organic</span></div>
+      <div class="item"><div class="itxt"><strong>Erste zwei Augustwochen — Content-Tag mit Sploon.</strong> Drehtag mit Gründerinnen: Gründerinnen-Reels aus ihrer Perspektive als Juristin & Medizinerin, persönliche Geschichte, Testimonial-Videos. Details im Tab "Content-Tag".</div><span class="chip" style="background:#eaf0ee;color:#2d5244">Produktion</span></div>
+      <div class="item"><div class="itxt">LinkedIn laufend (wöchentlich): Aktueller Stand der App · "Heute haben wir uns mit [Person/Partner] getroffen" · Einblick in Gründerinnen-Alltag als Juristin & Medizinerin · "Was uns diese Woche bewegt hat." Weniger App-Features, mehr Mensch.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">LinkedIn</span></div>
+      <div class="item"><div class="itxt"><strong>4. Augustwoche — Podcast #1: Marlene Lufen ("M wie Marlene").</strong> Gründerinnen als Gäste oder LifeWallet natürlich im Gespräch aufgegriffen. Keine Werbung — Gründergeschichte. Unique URL für Tracking. Danach: 2–3 Snippets (30–60 Sek.) als Reels auf Instagram teilen.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Podcast</span></div>
+      <div class="item"><div class="itxt"><strong>4. Augustwoche — Erste E-Mail an Warteliste (Mail 2).</strong> Manuell an alle bisherigen Einträge. Echte Geschichte, kein Produkt. CTA: Weiterschicken.</div><span class="chip" style="background:#f2e8ec;color:#5C1A2E">E-Mail</span></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph-hd"><div class="ph-bar" style="background:#4F5125"></div><div><div class="ph-name">Phase 3 — Influencer-Kampagne & Launch-Vorbereitung</div><div class="ph-date">25. August – 30. September</div></div></div>
+    <div class="items">
+      <div class="item"><div class="itxt"><strong>~25. Aug. — Creator 01 startet.</strong> 1 Video/Woche ab jetzt. Details zu allen Creator im Tab "Influencer".</div><span class="chip" style="background:#eaf0ee;color:#2d5244">Creator</span></div>
+      <div class="item"><div class="itxt"><strong>~01. Sep. — Creator 02.</strong></div><span class="chip" style="background:#eaf0ee;color:#2d5244">Creator</span></div>
+      <div class="item"><div class="itxt"><strong>1. Septemberwoche — Podcast #2: "Verquatscht & Verbunden".</strong> Drei-Generationen-Gespräch — Mutter, schwangere Tochter, Oma. Die Schwangerschaft als Anlass für Vorsorge: "Was kann ich jetzt tun, damit meine Familie abgesichert ist?" Unique URL: lifewallet.de/verquatscht · Anschließend Snippets auf Instagram.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Podcast</span></div>
+      <div class="item"><div class="itxt"><strong>~08. Sep. — Creator 03.</strong></div><span class="chip" style="background:#eaf0ee;color:#2d5244">Creator</span></div>
+      <div class="item"><div class="itxt"><strong>September — Pressemitteilungen & Fachmedien.</strong> Gründergeschichte + Launch-Datum + was LifeWallet löst. Zielmedien werden noch final definiert — Fachzeitschriften aus den Bereichen Recht, Pflege, Vorsorge, Familienplanung. Miriam Meckel/Handelsblatt: persönlicher Kontakt, kein Presseverteiler.</div><span class="chip" style="background:#f1f2d3;color:#4F5125">PR</span></div>
+      <div class="item"><div class="itxt"><strong>~15. Sep. — Creator 04.</strong></div><span class="chip" style="background:#eaf0ee;color:#2d5244">Creator</span></div>
+      <div class="item"><div class="itxt"><strong>~22. Sep. — Creator 05.</strong></div><span class="chip" style="background:#eaf0ee;color:#2d5244">Creator</span></div>
+      <div class="item"><div class="itxt"><strong>Ab 25. September — Launch-Teaser-Stories täglich.</strong> Ruhig, stimmungsvoll. Keine Countdown-Energie. "Bald ist es so weit."</div><span class="chip" style="background:#f1f2d3;color:#4F5125">Instagram</span></div>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="ph-hd"><div class="ph-bar" style="background:#2C2D1C"></div><div><div class="ph-name">Phase 4 — Launch & Post-Launch</div><div class="ph-date">01. Oktober +</div></div></div>
+    <div class="items">
+      <div class="item"><div class="itxt"><strong>01. Oktober — Launch-Post Instagram.</strong> Ruhig, klar, würdevoll. "Sie ist da. LifeWallet ist ab heute verfügbar." Ein Bild. Ein Satz. Ein Link.</div><span class="chip" style="background:#f1f2d3;color:#4F5125">Instagram</span></div>
+      <div class="item"><div class="itxt"><strong>01. Oktober — Story aller Creator.</strong> Alle aktiven Creator posten am Launch-Tag eine Story: die App ist jetzt live. Abgesprochen, kurz, kein langer Text — nur das Signal dass es so weit ist.</div><span class="chip" style="background:#eaf0ee;color:#2d5244">Creator</span></div>
+      <div class="item"><div class="itxt"><strong>01. Oktober — Mail 5 (Launch-Tag).</strong> "Dein Zugang ist jetzt bereit." Ein Satz, ein Button.</div><span class="chip" style="background:#f2e8ec;color:#5C1A2E">E-Mail</span></div>
+      <div class="item"><div class="itxt"><strong>LinkedIn-Launch-Post.</strong> Persönlicher als Instagram. Gründerinnen-Perspektive: was dieser Tag bedeutet, wofür sie dankbar sind.</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">LinkedIn</span></div>
+      <div class="item"><div class="itxt"><strong>Paid Social startet.</strong> Retargeting, UGC-Testimonials als Ads, Lookalike-Audiences. Details im Tab "Paid".</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Paid</span></div>
+      <div class="item"><div class="itxt"><strong>Oktober — Podcast #3: "Um Leben und Tod" (Luis & Johannes Bauer).</strong> Zwei Bestatter, 101 Folgen, 4,9 Sterne. App ist live — Gründerinnen können konkret zeigen was LifeWallet ist und warum es in genau diesen Momenten hilft. Unique URL: lifewallet.de/umleben</div><span class="chip" style="background:rgba(61,81,158,0.1);color:#3D519E">Podcast</span></div>
+      <div class="item"><div class="itxt"><strong>Post-Launch: 2–3 weitere Creator-Ankündigungen + Community-Management intensiv.</strong> Jeden Kommentar und jede DM beantworten. Erste Nutzer-Stimmen als Content nutzen.</div><span class="chip" style="background:#eaf0ee;color:#2d5244">Creator</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- E-MAILS -->
+<div class="panel">
+  <div class="sec-lbl">E-Mail-Sequenz — 5 Mails</div>
+  <div class="note"><strong>Logik:</strong> Vertrauen → Empathie → Neugier → Vorfreude → Zugang. Keine Feature-Listen. Jede Mail fühlt sich an wie eine Nachricht von einem Menschen — warm, persönlich, konkret.</div>
+  <div class="email-list">
+    <div class="ec" style="border-left-color:#A0BEAD">
+      <div class="et"><span class="en">Mail 01</span><span class="ed">bei Eintragung (automatisch, ab 01.07.)</span></div>
+      <div class="etitle">Willkommen — und danke, dass du da bist.</div>
+      <div class="edesc">Kein Produkt-Pitch. Wer sind wir, warum bauen wir LifeWallet, was dich erwartet. Persönlich, warm. CTA: "Schreib uns gern was dich hierher geführt hat."</div>
+      <span class="etag" style="background:#eaf0ee;color:#2d5244">Vertrauen</span>
+    </div>
+    <div class="ec" style="border-left-color:#4F5125">
+      <div class="et"><span class="en">Mail 02</span><span class="ed">4. Augustwoche (manuell an bestehende Liste)</span></div>
+      <div class="etitle">Was wirklich passiert, wenn jemand stirbt — und niemand weiß wo was ist.</div>
+      <div class="edesc">Echte Geschichte, anonymisiert. Kein Produkt erwähnen. Realität zeigen ohne Angst zu machen. CTA: "Schick das jemandem dem es wichtig sein könnte."</div>
+      <span class="etag" style="background:#f1f2d3;color:#4F5125">Empathie</span>
+    </div>
+    <div class="ec" style="border-left-color:#3D519E">
+      <div class="et"><span class="en">Mail 03</span><span class="ed">Mitte September (~17. Sep.)</span></div>
+      <div class="etitle">Was dich als Early-Access-Nutzerin erwartet.</div>
+      <div class="edesc">Erster konkreter Einblick in die App — als Erlebnis formuliert, nicht als Feature-Liste. "Stell dir vor, du öffnest LifeWallet und findest..." CTA: Datum im Kalender markieren.</div>
+      <span class="etag" style="background:rgba(61,81,158,0.1);color:#3D519E">Neugier</span>
+    </div>
+    <div class="ec" style="border-left-color:#B6C4DB">
+      <div class="et"><span class="en">Mail 04</span><span class="ed">~28. September</span></div>
+      <div class="etitle">Du bist eine der Ersten. Bereit?</div>
+      <div class="edesc">Kurz halten. Vorfreude erzeugen. "Am 1. Oktober geht es los — du bekommst als Early-Access-Nutzerin Zugang bevor die App öffentlich ist." CTA: Warten — du bekommst am 1. Oktober deine Mail.</div>
+      <span class="etag" style="background:rgba(182,196,219,0.2);color:#3D519E">Vorfreude</span>
+    </div>
+    <div class="ec" style="border-left-color:#2C2D1C">
+      <div class="et"><span class="en">Mail 05</span><span class="ed">01. Oktober — Launch-Tag</span></div>
+      <div class="etitle">Dein Zugang ist jetzt bereit.</div>
+      <div class="edesc">Kein Hype. "LifeWallet ist live. Du bist dabei. Hier ist dein Zugang." Ein klarer CTA-Button. Alles weitere entdeckt sich selbst.</div>
+      <span class="etag" style="background:#f1f2d3;color:#2C2D1C">Zugang</span>
+    </div>
+  </div>
+</div>
+
+<!-- ORGANIC -->
+<div class="panel">
+  <div class="sec-lbl">Organic Social — Formate & Frequenz</div>
+  <div class="note"><strong>Grundsatz:</strong> Kein Angst-Marketing. Saves und Shares sind wichtiger als Likes. Ton: warm, klar, ehrlich. LifeWallet kommuniziert wie eine ruhige, weise Freundin — nicht wie eine Versicherung.</div>
+  <div class="org-grid">
+    <div class="oc" style="border-top-color:#4F5125"><div class="ot">Erklärungs-Carousels</div><div class="of">2× pro Woche ab August</div><ul class="ol"><li>"Vollmacht, Testament, Patientenverfügung — was ist eigentlich was?"</li><li>"Diese 6 Dokumente braucht deine Familie. Hast du sie alle?"</li><li>"Warum Vorsorge immer zu früh ist — bis es zu spät ist"</li><li>"Was du in den ersten 48h nach einem Todesfall regeln musst"</li><li>Ziel: Saves & Weiterschicken → organischer Reach</li></ul></div>
+    <div class="oc" style="border-top-color:#A0BEAD"><div class="ot">Emotionale Geschichten</div><div class="of">1× pro Woche</div><ul class="ol"><li>Echte Situationen (anonymisiert) — Erfahrungen, keine Personen vergleichen</li><li>"Meine Mutter ist gestorben. Wir haben zwei Wochen nach ihrer Rentenversicherung gesucht."</li><li>"Mein Vater hatte alles geregelt. Trotzdem das schwerste Jahr — aber nicht wegen Bürokratie."</li><li>Ziel: Identifikation, "Das will ich meiner Familie ersparen"</li></ul></div>
+    <div class="oc" style="border-top-color:#3D519E"><div class="ot">Gründerinnen-Reels</div><div class="of">1× alle 2 Wochen (aus Content-Tag)</div><ul class="ol"><li>Aus ihrer Perspektive als Juristin & Medizinerin — was sie täglich erleben</li><li>"Ich habe als Juristin gesehen was passiert wenn niemand vorgesorgt hat"</li><li>Persönlich, nahbar — Menschen lernen die Gründerinnen kennen, nicht die App</li><li>Ziel: Vertrauen in die Menschen hinter LifeWallet aufbauen</li></ul></div>
+    <div class="oc" style="border-top-color:#B6C4DB"><div class="ot">Community Polls & Stories</div><div class="of">täglich</div><ul class="ol"><li>"Hast du ein Testament?" — Ja/Nein-Poll, keine Wertung</li><li>"Weißt du wo alle wichtigen Dokumente deiner Eltern sind?"</li><li>"Was wäre für dich am schlimmsten, wenn du nicht vorbereitet bist?"</li><li>"DM LIFEWALLET" in jeder zweiten Story mit Link-Sticker</li></ul></div>
+    <div class="oc" style="border-top-color:#2C2D1C"><div class="ot">Testimonial-Videos</div><div class="of">ab September (aus Content-Tag)</div><ul class="ol"><li>Normale Personen aus dem Gründerinnen-Umfeld — keine Influencer</li><li>"Ich hätte mir das in diesem Moment so gewünscht"</li><li>Ungeskriptet, direkt, ehrlich — 30–60 Sek.</li><li>Ziel: sofortige Identifikation — auch als spätere Ad nutzbar</li></ul></div>
+    <div class="oc" style="border-top-color:#4F5125"><div class="ot">Follower-to-Follower</div><div class="of">laufend ab 15. Juli</div><ul class="ol"><li>Eltern 30–50, Organisation & Ordnung, Personal Finance</li><li>Trauer-nahe Accounts, Familienplanung & Schwangerschaft</li><li>Aktiv kommentieren & liken — nicht nur folgen</li><li>#vorsorge #familienorganisation #ordnungsliebe #nachlassplanung</li></ul></div>
+  </div>
+  <div class="diff"><p><strong>LinkedIn parallel:</strong> Wöchentliche Posts — kein Marketing, echter Gründerinnen-Alltag. Aktueller Stand der App · Meetings & Begegnungen · Einblicke als Juristin & Medizinerin · Was diese Woche bewegt hat. Für Corporate-Benefit-Zielgruppe und Handelsblatt/HR-Umfeld.</p></div>
+</div>
+
+<!-- WARTELISTE -->
+<div class="panel">
+  <div class="sec-lbl">Warteliste — Mechanik & Platzierungen</div>
+  <div class="lm-desc">
+    <h3>Was ist das Ziel?</h3>
+    <p>Vor dem Launch so viele E-Mail-Adressen wie möglich sammeln — Menschen die wirklich interessiert sind und am Launch-Tag als Erste Zugang bekommen. Warteliste = Vertrauensgeste der Nutzerinnen, kein Newsletter.</p>
+    <div class="highlight">Alle Wartelisten-Einträge landen in der E-Mail-Sequenz und bekommen am 01. Oktober als Erste den Zugangslink. Je mehr Einträge vor Launch, desto stärker die Lookalike-Audiences für Paid Social ab Oktober.</div>
+  </div>
+  <div class="lm-flow">
+    <div class="fs"><div class="fn">1</div><div class="fl">DM "LIFE­WALLET"<br>oder Bio-Link</div></div>
+    <div class="fa">›</div>
+    <div class="fs"><div class="fn">2</div><div class="fl">Auto-Antwort<br>via ManyChat</div></div>
+    <div class="fa">›</div>
+    <div class="fs"><div class="fn">3</div><div class="fl">E-Mail + Vorname<br>eintragen</div></div>
+    <div class="fa">›</div>
+    <div class="fs"><div class="fn">4</div><div class="fl">Bestätigungs-<br>mail</div></div>
+    <div class="fa">›</div>
+    <div class="fs"><div class="fn">5</div><div class="fl">E-Mail-Sequenz<br>(5 Mails)</div></div>
+  </div>
+  <div class="sec-lbl" style="margin-top:4px">Alle Platzierungen</div>
+  <div class="pl-grid">
+    <div class="plc"><div class="plh"><div class="dot"></div>Instagram Bio</div><div class="plt">Link in Bio → Wartelisten-Landingpage. <em>Jede zweite Story mit Link-Sticker.</em></div></div>
+    <div class="plc"><div class="plh"><div class="dot"></div>Stories — DM-Mechanik</div><div class="plt">"DM LIFEWALLET" — niedrige Hürde, hohe Interaktion. ManyChat muss vor Start getestet sein.</div></div>
+    <div class="plc"><div class="plh"><div class="dot"></div>Podcast-Auftritte</div><div class="plt">Unique URL pro Podcast für Tracking. <em>lifewallet.de/marlene · lifewallet.de/verquatscht</em></div></div>
+    <div class="plc"><div class="plh"><div class="dot"></div>Creator-Posts</div><div class="plt">Jeder Creator verlinkt direkt auf Warteliste. Tracking-Parameter pro Creator einrichten.</div></div>
+    <div class="plc"><div class="plh"><div class="dot"></div>Landingpage</div><div class="plt"><em>Ein Satz. Ein Formular. Ein Button.</em> Kein Feature-Wirrwarr. "Sei dabei, wenn LifeWallet startet."</div></div>
+    <div class="plc"><div class="plh"><div class="dot"></div>LinkedIn</div><div class="plt">Jeder LinkedIn-Post verlinkt auf Warteliste. Wichtig für B2B-Leads (Corporate Benefit, HR-Entscheider).</div></div>
+  </div>
+  <div class="warn">Landingpage-Regel: So einfach wie möglich. Jedes zusätzliche Element kostet Conversion.</div>
+</div>
+
+<!-- INFLUENCER -->
+<div class="panel">
+  <div class="sec-lbl">Influencer-Kampagne — 1 Video/Woche ab 25. August</div>
+  <div class="note"><strong>Strategie:</strong> Keine Einzel-Posts gegen Honorar — langfristige Partnerschaften. Creator werden Botschafter, nicht Werbetafeln. Briefing-Pflicht für alle: kein Angst-Marketing, immer Fürsorge & Klarheit als Framing. Inhalte vorab abstimmen.</div>
+  <div class="cr-grid">
+    <div class="cr-card">
+      <div class="cr-head"><div class="cr-num">01</div><div class="cr-title">Creator 01 — Intergenerational / Familie<br><span style="font-size:10px;font-weight:400;color:#6b6c4a">~25. August · Persönlicher Kontakt Gründerinnen</span></div></div>
+      <div class="cr-desc">Intergenerationelles Gespräch über Vorsorge — zwei Generationen, ein ehrliches Gespräch. LifeWallet als natürlicher Schluss. Stärkster emotionaler Einstieg in die Kampagne.</div>
+      <div class="cr-hook">Kandidaten: Louis Lazarr (Jura-Student, lebt bei Oma, ARD 37-Grad-Doku April 2026)</div>
+    </div>
+    <div class="cr-card">
+      <div class="cr-head"><div class="cr-num">02</div><div class="cr-title">Creator 02 — Organisation & Alltagswissen<br><span style="font-size:10px;font-weight:400;color:#6b6c4a">~01. September · Preisanfrage Juli</span></div></div>
+      <div class="cr-desc">Kompakte Liste als Mehrwert — sein Format, sein Stil. "5 Dinge die du jetzt regeln solltest." Sachlicher Einstieg ohne Emotion. LifeWallet als logische Lösung am Ende.</div>
+      <div class="cr-hook">Kandidaten: listenwissen.de / Lukas Sieverding (512K Follower, Alltagswissen-Nische)</div>
+    </div>
+    <div class="cr-card">
+      <div class="cr-head"><div class="cr-num">03</div><div class="cr-title">Creator 03 — Ordnung & System / persönliche Erfahrung<br><span style="font-size:10px;font-weight:400;color:#6b6c4a">~08. September · Persönlicher Kontakt Gründerinnen</span></div></div>
+      <div class="cr-desc">Wenn eine persönliche Erfahrung mit Verlust vorhanden: authentischster Moment der Kampagne. Sonst: "das System für das Wichtigste im Leben." Kein Druck, kein Script — das Gespräch muss von ihnen kommen.</div>
+      <div class="cr-hook">Kandidaten: thehomehabit (Isabella Franke, 237K) + Marc (kürzlicher Sterbefall)</div>
+    </div>
+    <div class="cr-card">
+      <div class="cr-head"><div class="cr-num">04</div><div class="cr-title">Creator 04 — Medizin / Pflege / Expertise<br><span style="font-size:10px;font-weight:400;color:#6b6c4a">~15. September · Preisanfrage Juli</span></div></div>
+      <div class="cr-desc">Aus der Perspektive von jemandem der täglich mit Sterben und Abschied zu tun hat. Direkt, ungeskriptet. "Was ich mir für diese Familien gewünscht hätte." Stärkste inhaltliche Glaubwürdigkeit.</div>
+      <div class="cr-hook">Kandidaten: Ricardo Lange / pfleger.ricardo (259K, Intensivpfleger, SZ-Kolumnist)</div>
+    </div>
+    <div class="cr-card">
+      <div class="cr-head"><div class="cr-num">05</div><div class="cr-title">Creator 05 — Moderatorin / Reichweite & Vertrauen<br><span style="font-size:10px;font-weight:400;color:#6b6c4a">~22. September · Persönlicher Kontakt Gründerinnen · Post + Podcast</span></div></div>
+      <div class="cr-desc">Post erscheint in derselben Woche wie die Podcast-Folge — verdoppelt die Reichweite ohne Zusatzaufwand. Breites erwachsenes Publikum, maximale Glaubwürdigkeit bei 35–60-Jährigen.</div>
+      <div class="cr-hook">Kandidaten: Marlene Lufen (Sat.1, ARD · "M wie Marlene"-Podcast)</div>
+    </div>
+    <div class="cr-card">
+      <div class="cr-head"><div class="cr-num">06</div><div class="cr-title">Creator 06 — Mama-Tochter / Familie & Generationen<br><span style="font-size:10px;font-weight:400;color:#6b6c4a">~29. September · Persönlicher Kontakt Gründerinnen · Post + Podcast</span></div></div>
+      <div class="cr-desc">Begleitend zum Podcast-Auftritt — Mutter, schwangere Tochter, Oma. Die Schwangerschaft als Anlass für das Vorsorge-Gespräch. Post verlinkt auf Podcast und Warteliste.</div>
+      <div class="cr-hook">Kandidaten: Andrea Schiffner + Lisa-Marie Schiffner ("Verquatscht & Verbunden")</div>
+    </div>
+  </div>
+  <div class="box-plain" style="border-top:3px solid #3D519E;margin-top:12px"><div class="box-h">Briefing-Pflicht für alle Creator</div><div class="box-t">Schriftliches Briefing: Was darf gesagt werden, was nicht. Kein Angst-Marketing. Immer Fürsorge & Klarheit als Framing. Welchen Link/CTA einbauen. Wann posten. Inhalte vorab abstimmen. Launch-Tag-Story für alle Creator einplanen.</div></div>
+</div>
+
+<!-- PODCASTS -->
+<div class="panel">
+  <div class="sec-lbl">Podcast-Strategie — 3 Auftritte</div>
+  <div class="note"><strong>Format:</strong> Kein Pitch, kein Script — echte Gespräche. Gründergeschichte erzählen, LifeWallet natürlich eingebettet. Unique URL pro Auftritt für Tracking. Aus jedem Auftritt 2–3 Snippets (30–60 Sek.) als Reels auf Instagram.</div>
+  <div class="pd-grid">
+    <div class="pd-card">
+      <div class="pd-head"><span class="pd-num">Podcast 01</span><span class="pd-date">Aufnahme erste zwei Augustwochen · Ausstrahlung 4. Augustwoche</span></div>
+      <div class="pd-title">Marlene Lufen — "M wie Marlene: Wie gelingt das Leben?"</div>
+      <div class="pd-desc">Gründerinnen als Gäste oder LifeWallet natürlich im Gespräch aufgegriffen. Keine Werbung — Gründergeschichte und warum das Thema alle betrifft. Wöchentlicher Montags-Podcast seit 2024 · 4,9 Sterne · Themen: Beziehungen, Gesundheit, Finanzen, große Lebensfragen. Breites erwachsenes Publikum — exakter Fit für LifeWallet.</div>
+      <div class="pd-url">lifewallet.de/marlene</div>
+    </div>
+    <div class="pd-card" style="border-left-color:#A0BEAD">
+      <div class="pd-head"><span class="pd-num">Podcast 02</span><span class="pd-date">Aufnahme erste zwei Augustwochen · Ausstrahlung 1. Septemberwoche</span></div>
+      <div class="pd-title">Verquatscht & Verbunden — Mutter (46) · Tochter (24, schwanger) · Oma</div>
+      <div class="pd-desc">Drei-Generationen-Gespräch. Die Schwangerschaft von Lisa-Marie als natürlicher Anlass: "Was kann ich jetzt tun, damit meine Familie abgesichert ist?" Nicht der Tod im Fokus — Fürsorge und Sicherheit für die eigene Familie. Andrea und Lisa-Marie haben bereits öffentlich über Verlust gesprochen (Folge #6: Fehlgeburt) — das schafft Tiefe ohne Erklärung. Österreichischer Mama-Tochter-Podcast · wöchentlich · 4,9 Sterne · 657 Bewertungen.</div>
+      <div class="pd-url">lifewallet.de/verquatscht</div>
+    </div>
+    <div class="pd-card" style="border-left-color:#2C2D1C">
+      <div class="pd-head"><span class="pd-num">Podcast 03</span><span class="pd-date">Oktober · post-Launch</span></div>
+      <div class="pd-title">Um Leben und Tod — Luis Bauer & Johannes Bauer</div>
+      <div class="pd-desc">Zwei Bestatter die offen und ehrlich über ihren Alltag rund um Tod und Bestattung sprechen. 101 Folgen, 4,9 Sterne, 1.400 Bewertungen — eine loyale Community die das Thema Tod bereits vollständig entstigmatisiert hat. Gründerinnen kommen als Gäste: App ist live, sie können konkret zeigen was LifeWallet ist und warum es in genau diesen Momenten hilft, die Luis und Johannes täglich begleiten. Einer der stärksten thematischen Fits im gesamten Podcast-Portfolio.</div>
+      <div class="pd-url">lifewallet.de/umleben</div>
+    </div>
+  </div>
+  <div class="info-box"><strong>Miriam Meckel / Handelsblatt:</strong> Nicht als klassischer Podcast-Auftritt, sondern als Thought-Leadership-Brücke. LinkedIn-Artikel, Erwähnung im "Meckel & Matthes"-Podcast (Handelsblatt, jeden Freitag) oder gemeinsamer Beitrag — für Corporate-Benefit-Positionierung und B2B-Zielgruppe.</div>
+</div>
+
+<!-- CONTENT TAG -->
+<div class="panel">
+  <div class="sec-lbl">Content-Tag mit Sploon — erste zwei Augustwochen · 600 €</div>
+  <div class="note"><strong>Ziel:</strong> An einem Produktionstag so viel Rohmaterial wie möglich aufnehmen — für Wochen an Ausspielung. Material wird über September und Oktober schrittweise ausgespielt — und ab Oktober auch als Paid Ads.</div>
+  <div class="ct-grid">
+    <div class="ct-card"><div class="ct-title">Gründerinnen-Reels — 5 Videos</div><ul class="ct-list"><li>"Als Juristin habe ich gesehen was passiert wenn niemand vorgesorgt hat" — persönlich, aus dem Berufsalltag</li><li>"Als Medizinerin erlebe ich täglich wie wichtig Vollmachten und klare Wünsche sind"</li><li>Warum sie als Expertinnen trotzdem selbst nie vorgesorgt hatten — und was das verändert hat</li><li>Hinter dem Namen: "LifeWallet — was das für uns bedeutet"</li><li>Varianten: ernst & persönlich + leichter & nahbar — für verschiedene Momente in der Kampagne</li></ul></div>
+    <div class="ct-card"><div class="ct-title">Testimonial-Videos — 3–5 Personen</div><ul class="ct-list"><li>Normale Personen aus dem Gründerinnen-Umfeld — keine Influencer, keine Prominenten</li><li>Verschiedene Situationen: Todesfall in der Familie, plötzlicher Pflegefall, Unfall</li><li>Nur eine Einstiegsfrage, dann frei sprechen lassen — ungeskriptet, direkt</li><li>30–60 Sek., direkt in die Kamera, kein inszenierter Rahmen</li><li>Dieses Material ist direkt als UGC-Ad ab Oktober verwendbar</li></ul></div>
+  </div>
+  <div class="two-col">
+    <div class="box-plain"><div class="box-h">Ton für alle Aufnahmen</div><div class="box-t">Freundlich, ehrlich, emotional — das Persönliche darf sichtbar sein. Keine gestellten Situationen, keine aufgesetzten Sätze.</div></div>
+    <div class="box-plain"><div class="box-h">Ausspiel-Plan</div><div class="box-t">Nicht alles sofort. Gründerinnen-Reels in September zwischen Influencer-Posts. Testimonials ab September als Organic. Ab Oktober: Testimonials als UGC-Ads, Gründerinnen-Reels für Awareness-Kampagnen auf Meta.</div></div>
+  </div>
+  <div class="warn">Content-Tag-Termin muss bis Mitte Juli fixiert sein — damit Videoformate und Skripte rechtzeitig vorbereitet werden können.</div>
+</div>
+
+<!-- COLD OUTREACH -->
+<div class="panel">
+  <div class="sec-lbl">Cold Outreach — B2B-Fokus, Start 15. Juli</div>
+  <div class="note"><strong>Start parallel zu organischem Social am 15. Juli.</strong> Fokus liegt auf B2B — Corporate Benefit und Multiplikatoren. B2B Cold Mail ist in der EU (DSGVO) bei gewerblichen Empfängern grundsätzlich erlaubt. Für Privatpersonen (B2C) gilt: nur über Opt-in (Warteliste, Instagram). Cold Outreach läuft daher ausschließlich an Unternehmen und Fachleute.</div>
+
+  <div class="sec-lbl" style="margin-top:4px">Woher kommen die Leads?</div>
+  <div class="co-grid">
+
+    <div class="co-card">
+      <div class="co-title">Gekaufte Lead-Listen — B2B</div>
+      <div class="co-sub">Empfohlene Tools & Quellen</div>
+      <ul class="co-list">
+        <li>Gezielt aufgebaute Listen über B2B-Datenbanken (Apollo.io, Echobot/Dealfront für DACH, LinkedIn Sales Navigator)</li>
+        <li>Fokus: Unternehmen die LifeWallet als Corporate Benefit einsetzen können — HR-Entscheider, People & Culture, Benefits Manager</li>
+        <li>Ergänzend: Multiplikatoren die LifeWallet an ihre Kunden weiterempfehlen — Notare, Finanzberater, Bestatter</li>
+        <li>Ziel ist nicht Massenversand sondern qualifizierte, relevante Kontakte die wirklich passen</li>
+      </ul>
+    </div>
+
+    <div class="co-card">
+      <div class="co-title">Zielgruppe 1 — HR & People Culture</div>
+      <div class="co-sub">Corporate Benefit · Start sofort</div>
+      <ul class="co-list">
+        <li>Jobtitel: HR Manager, Head of People, Benefits Manager, HR Business Partner, Chief People Officer</li>
+        <li>Unternehmensgröße: 50–500 Mitarbeitende (groß genug für Benefits, klein genug für schnelle Entscheidung)</li>
+        <li>Branchen: Tech, Consulting, Finanz, Gesundheit, Pharma — Branchen mit hohem Employee-Wellbeing-Fokus</li>
+        <li>Region: DACH (Deutschland, Österreich, Schweiz)</li>
+        <li>Framing: "Mitarbeitende in Ausnahmesituationen entlasten — LifeWallet als Corporate Benefit"</li>
+      </ul>
+    </div>
+
+    <div class="co-card">
+      <div class="co-title">Zielgruppe 2 — Recht & Finanzen als Multiplikatoren</div>
+      <div class="co-sub">Empfehlung an Klienten · hohe Qualität</div>
+      <ul class="co-list">
+        <li>Notare, Erbrechtsanwälte, Nachlassberater — direkter täglicher Kontakt mit der Zielgruppe</li>
+        <li>Steuerberater, Finanzplaner, Vermögensberater — beraten Familien zu Erbschaft & Vorsorge</li>
+        <li>Quellen: Notarkammer-Verzeichnis, DAV (Deutscher Anwaltverein), BFP (Bundesverband Financial Planner)</li>
+        <li>Framing: "Das ist kein Konkurrent — das ergänzt Ihre Beratung und entlastet Ihre Klienten"</li>
+        <li>Ziel: Empfehlung als Tool, kein klassischer B2B-Deal. Kooperation auf Augenhöhe.</li>
+      </ul>
+    </div>
+
+    <div class="co-card">
+      <div class="co-title">Zielgruppe 3 — Pflege & Medizin als Multiplikatoren</div>
+      <div class="co-sub">Empfehlung an Patienten & Angehörige</div>
+      <ul class="co-list">
+        <li>Hospize, Palliativstationen, ambulante Pflegedienste — sie begleiten Menschen in genau dieser Phase</li>
+        <li>Krankenhäuser (Sozialdienst) — erste Anlaufstelle für Angehörige nach einem Todesfall</li>
+        <li>Trauerbegleiter, Sterbeammen — kleine Praxen, persönlicher Kontakt möglich</li>
+        <li>Quellen: Hospiz-Verband DACH, Caritas, Diakonie, öffentliche Klinikverzeichnisse</li>
+        <li>Framing: "Wir wollen Familien in dieser Zeit entlasten — können wir uns vorstellen wie das aussehen könnte?"</li>
+      </ul>
+    </div>
+
+    <div class="co-card">
+      <div class="co-title">Zielgruppe 4 — Bestatter & Bestattungsvorsorge</div>
+      <div class="co-sub">Hoher thematischer Fit · einfach erreichbar</div>
+      <ul class="co-list">
+        <li>Bestattungsinstitute — direkte Schnittstelle zwischen Verstorbenem und Angehörigen</li>
+        <li>Bestattungsvorsorge-Anbieter — beraten Menschen die sich zu Lebzeiten vorbereiten</li>
+        <li>Quellen: Bestatterverband Deutschland (BDB), Österreichischer Bestatterverband</li>
+        <li>Framing: "LifeWallet und Ihre Vorsorgeberatung ergänzen sich — dürfen wir Ihnen zeigen wie?"</li>
+        <li>Besonders: viele Bestatter haben kleine Lokalpräsenz, reagieren auf persönliche Mails gut</li>
+      </ul>
+    </div>
+
+    <div class="co-card">
+      <div class="co-title">Zielgruppe 5 — Newsletter & Community-Betreiber</div>
+      <div class="co-sub">Placement in bestehenden Listen</div>
+      <ul class="co-list">
+        <li>Newsletter zu Vorsorge, Finanzen, Familienplanung, Pflege — oft 5.000–50.000 Abonnenten</li>
+        <li>Ziel: bezahltes Placement oder Kooperation (Gegenseitigkeit, kleines Honorar)</li>
+        <li>Plattformen: Substack-Verzeichnis, Steadyhq, LinkedIn-Newsletter-Suche</li>
+        <li>Vorteil: Empfehlung von einer Stimme der die Community vertraut — wärmer als jede Kaltmail</li>
+        <li>Auch interessant: Podcast-Newsletter (Marlene Lufen, Verquatscht & Verbunden haben eigene Verteiler)</li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="info-box" style="margin-top:4px"><strong>Timing:</strong> Start 15. Juli parallel zu organischem Social. Zuerst Zielgruppe 1 (HR/Corporate Benefit) und Zielgruppe 2 (Recht & Finanzen) — diese haben den klarsten Business-Case. Zielgruppen 3–5 ab August wenn erste Learnings aus den Antworten vorliegen.</div>
+</div>
+
+<!-- PAID -->
+<div class="panel">
+  <div class="sec-lbl">Paid Social — ab Launch (01. Oktober)</div>
+  <div class="note"><strong>Grundsatz:</strong> Vor dem Launch kein Paid-Budget. Organic ist in dieser Phase der Trust-Aufbau — Personen lernen die Menschen hinter LifeWallet kennen, den Nutzen und die Features der App. Paid geht es um reine Conversion, und die funktioniert erst wenn die App live und installierbar ist. Falls nach dem Launch Interesse an einer Paid-Kampagne besteht, wird dafür ein separates Budget und Setup definiert.</div>
+  <div class="paid-grid">
+    <div class="paid-card">
+      <div class="pc-head"><div class="pc-num">1</div><div class="pc-title">Retargeting — Wartelisten-Besucher</div><span class="pc-format" style="background:rgba(79,81,37,0.1);color:#4F5125">Meta · Retargeting</span></div>
+      <div class="pc-desc">Alle die die Wartelisten-Landingpage besucht aber sich nicht eingetragen haben — erste und günstigste Zielgruppe. Warme Zielgruppe, niedrigste Kosten pro Conversion. Direkt ab Launch-Tag aktivieren.</div>
+      <div class="pc-hook">Format: kurzes Gründerinnen-Reel aus Content-Tag + klarer CTA "Jetzt herunterladen"</div>
+    </div>
+    <div class="paid-card">
+      <div class="pc-head"><div class="pc-num">2</div><div class="pc-title">UGC Testimonial-Ads (aus Content-Tag)</div><span class="pc-format" style="background:rgba(160,190,173,0.15);color:#2d5244">Meta · UGC</span></div>
+      <div class="pc-desc">Testimonial-Videos aus dem Content-Tag direkt als Ads. Ungeskriptet, ehrlich, echte Menschen. Verschiedene Situationen testen: Todesfall, Pflegefall, Unfall — welches triggert die höchste Resonanz?</div>
+      <div class="pc-hook">Hook: "Als mein [Angehöriger] gestorben ist, wusste niemand von uns wo was ist. Das war das Schlimmste."</div>
+    </div>
+    <div class="paid-card">
+      <div class="pc-head"><div class="pc-num">3</div><div class="pc-title">Lookalike-Audiences — E-Mail-Liste</div><span class="pc-format" style="background:rgba(61,81,158,0.08);color:#3D519E">Meta · Lookalike</span></div>
+      <div class="pc-desc">Basierend auf der aufgebauten Warteliste Lookalike-Audiences erstellen. Je mehr E-Mail-Adressen vor Launch gesammelt wurden, desto präziser das Targeting — deshalb ist die Warteliste das wichtigste Asset der Pre-Launch-Phase.</div>
+      <div class="pc-hook">Zielgruppe: Eltern 30–55, Interesse an Organisation, Vorsorge, Familie, Finanzen</div>
+    </div>
+    <div class="paid-card">
+      <div class="pc-head"><div class="pc-num">4</div><div class="pc-title">Gründerinnen-Video (Awareness, kalte Zielgruppe)</div><span class="pc-format" style="background:rgba(79,81,37,0.08);color:#4F5125">Meta · Awareness</span></div>
+      <div class="pc-desc">Gründerinnen aus ihrer Perspektive als Juristin & Medizinerin — "Was wir täglich sehen und warum wir LifeWallet gebaut haben." Für kalte Zielgruppen. Kein Feature-Pitch, nur die Geschichte. Material aus Content-Tag.</div>
+      <div class="pc-hook">Hook: "Als Juristin und Medizinerin sehen wir täglich was passiert wenn niemand vorgesorgt hat."</div>
+    </div>
+    <div class="paid-card">
+      <div class="pc-head"><div class="pc-num">5</div><div class="pc-title">Creator-Content boosten</div><span class="pc-format" style="background:rgba(182,196,219,0.2);color:#3D519E">Meta · Boost</span></div>
+      <div class="pc-desc">Die Creator-Posts die organisch am besten performen, als Ads boosten. Erlaubnis der Creator vorab im Briefing verankern. Besonders geeignet: Creator 04 (Glaubwürdigkeit/Pflege) und Creator 02 (Sachlichkeit + Reichweite).</div>
+      <div class="pc-hook">Organic-Erfolg als Signal: Was ohne Budget funktioniert, funktioniert mit Budget noch besser.</div>
+    </div>
+  </div>
+  <div class="info-box"><strong>B2B parallel — LinkedIn Ads:</strong> Für Corporate-Benefit-Positionierung. Zielgruppe: HR-Entscheider, CEOs, People & Culture. LifeWallet als Benefit für Mitarbeitende in Ausnahmesituationen.</div>
+</div>
+
+<!-- BUDGET -->
+<div class="panel">
+  <div class="sec-lbl">Kampagnenbudget & Leistungen</div>
+  <div class="budget-wrap">
+
+    <div class="budget-phase">
+      <div class="bp-head"><span class="bp-label">Phase 0 — Probe & Setup</span><span class="bp-date">15. Juni – 14. Juli</span></div>
+      <div class="bp-price">700 €</div>
+      <div class="bp-per">/ Monat · Probemonat</div>
+      <div class="bp-includes">
+        <div class="bp-item">Strategie & Konzept finalisieren</div>
+        <div class="bp-item">Kanalaufbau Instagram & LinkedIn (Bio, Highlights, Profil)</div>
+        <div class="bp-item">9 erste Posts vorbereiten (texten & briefen)</div>
+        <div class="bp-item">ManyChat-Setup & Wartelisten-Mechanik einrichten</div>
+        <div class="bp-item">Influencer-Outreach vorbereiten & erste Kontakte herstellen</div>
+        <div class="bp-item">Podcast-Anfragen & Terminfindung</div>
+        <div class="bp-item">Content-Tag-Termin mit Sploon fixieren</div>
+      </div>
+    </div>
+
+    <div class="budget-phase">
+      <div class="bp-head"><span class="bp-label">Phase 1 & 2 — Fundament & Auffahren</span><span class="bp-date">15. Juli – 14. August</span></div>
+      <div class="bp-price">1.150 €</div>
+      <div class="bp-per">/ Monat</div>
+      <div class="bp-includes">
+        <div class="bp-item">Organic Social: 1–2 Posts/Woche + tägliche Stories</div>
+        <div class="bp-item">Follower-to-Follower-Tool: laufende Zielgruppen-Identifikation</div>
+        <div class="bp-item">LinkedIn: wöchentliche Posts (Gründerinnen-Alltag)</div>
+        <div class="bp-item">Influencer-Kommunikation & Briefings vorbereiten</div>
+        <div class="bp-item">Podcast-Koordination & Vorbereitung Content-Tag</div>
+        <div class="bp-item">Content-Tag mit Sploon (Drehtag Gründerinnen + Testimonials) — einmalig 600 €</div>
+        <div class="bp-item">Wartelisten-Monitoring & E-Mail-Sequenz einrichten</div>
+        <div class="bp-item">Wöchentliche Abstimmung</div>
+      </div>
+    </div>
+
+    <div class="budget-phase">
+      <div class="bp-head"><span class="bp-label">Phase 3 & 4 — Kampagne & Launch</span><span class="bp-date">ab 15. August</span></div>
+      <div class="bp-price">2.000 €</div>
+      <div class="bp-per">/ Monat · laufend bis und nach Launch</div>
+      <div class="bp-includes">
+        <div class="bp-item">Organic Social: 2 Posts/Woche + täglich Stories</div>
+        <div class="bp-item">Influencer-Kampagne: Briefings, Koordination, Abstimmung aller Creator</div>
+        <div class="bp-item">Podcast-Nachbereitung & Snippets für Instagram aufbereiten</div>
+        <div class="bp-item">E-Mail-Sequenz: Mails 3–5 texten & ausspielen</div>
+        <div class="bp-item">Cold Outreach starten & betreuen</div>
+        <div class="bp-item">Launch-Koordination: alle Creator synchronisieren</div>
+        <div class="bp-item">Paid Social Setup & Begleitung (ab Oktober)</div>
+        <div class="bp-item">Community-Management intensiv (post-Launch)</div>
+        <div class="bp-item">Wöchentliche Abstimmung + Reporting</div>
+      </div>
+    </div>
+
+  </div>
+  <div class="budget-total">
+    <div><div class="bt-lbl">Regulärer Retainer (nach Kampagne)</div><div style="font-size:10px;color:rgba(241,242,211,0.3);margin-top:2px">ab Stabilisierung nach Launch</div></div>
+    <div class="bt-val">1.650 € / Mo.</div>
+  </div>
+  <div class="budget-note"><strong>Hinweis:</strong> Paid Social (Meta Ads) ist in diesen Beträgen nicht enthalten. Falls nach dem App-Launch Interesse an einer Paid-Kampagne besteht, wird dafür ein separates Budget und Konzept erstellt.</div>
+</div>
+
+<footer>LifeWallet · Kampagnenplan Launch Oktober 2026 · Vertraulich</footer>
+
+<script>
+const panels=document.querySelectorAll('.panel');
+const tabs=document.querySelectorAll('.tab');
+function sw(i){panels.forEach(p=>p.classList.remove('on'));tabs.forEach(t=>t.classList.remove('on'));panels[i].classList.add('on');tabs[i].classList.add('on');}
+function checkPw(){
+  const val=document.getElementById('pw-input').value;
+  if(val==='lifewallet-oktober'){
+    document.getElementById('pw-screen').style.display='none';
+  } else {
+    const err=document.getElementById('pw-err');
+    err.textContent='Falsches Passwort. Bitte erneut versuchen.';
+    document.getElementById('pw-input').value='';
+    document.getElementById('pw-input').focus();
+    setTimeout(()=>err.textContent='',3000);
+  }
+}
+</script>
+</body>
+</html>
